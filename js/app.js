@@ -100,7 +100,7 @@ function productCardHTML(p){
     <div class="card-media" data-action="open-modal">
       ${p.promo ? `<span class="badge-promo">${p.promo}</span>` : ""}
       <span class="badge-brand"><img src="logo/${p.brandLogo}" alt=""></span>
-      <img src="${cover}" alt="${p.name}" loading="lazy">
+      <img src="${cover}" alt="${p.name}" loading="lazy" class="card-cover-img">
     </div>
     <div class="card-body">
       <h3 class="card-title" data-action="open-modal">${p.name}</h3>
@@ -159,6 +159,24 @@ function refreshCardPricing(){
     card.querySelector('[data-role="card-upsell"]').textContent = next
       ? `Agrega ${next.min - previewQty} más y paga ${formatMoney(p[next.key])} c/u`
       : "Ya tienes el mejor precio";
+  });
+}
+
+// ============================================================
+// CICLO DE IMÁGENES EN TARJETAS
+// ============================================================
+function startCardImageCycling(){
+  document.querySelectorAll(".product-card").forEach(card => {
+    const id = card.dataset.productId;
+    const p = productsById[id];
+    if (!p || !p.images || p.images.length < 2) return;
+    const img = card.querySelector(".card-cover-img");
+    if (!img) return;
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % p.images.length;
+      img.src = imgPath(p, p.images[idx]);
+    }, 2500);
   });
 }
 
@@ -428,7 +446,8 @@ function setupCatalogEvents(){
     if (!card) return;
     const id = card.dataset.productId;
     const qtyInput = card.querySelector('[data-role="qty-input"]');
-    const action = e.target.dataset.action;
+    const actionEl = e.target.closest("[data-action]");
+    const action = actionEl ? actionEl.dataset.action : null;
 
     if (action === "open-modal"){ openModal(id); return; }
     if (action === "qty-minus"){
@@ -554,6 +573,7 @@ function setupCartEvents(){
 function init(){
   loadCart();
   renderCatalog();
+  startCardImageCycling();
   setupScrollspy();
   setupCatalogEvents();
   setupModalEvents();
