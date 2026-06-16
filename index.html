@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Straven — Catálogo Mayorista</title>
+<link rel="icon" href="imgs/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="imgs/logo.webp" alt="Straven" class="brand-logo">
+    </a>
+    <div class="header-tagline">Catálogo Mayorista</div>
+    <div class="header-actions">
+      <button class="cart-toggle" id="cartToggle" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cart-icon">
+          <path d="M3 4H5L5.6 7M5.6 7H21L18 14H7.5M5.6 7L7.5 14M7.5 14L6.3 17H19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="20" r="1.4" fill="currentColor"/>
+          <circle cx="18" cy="20" r="1.4" fill="currentColor"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+  <nav class="cat-nav" id="catNav" aria-label="Categorías">
+    <div class="cat-nav-inner" id="catNavInner"></div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-kicker">Precios especiales por volumen</p>
+    <h1 class="hero-title">Mayoreo sin <span class="accent">complicaciones</span></h1>
+    <p class="hero-sub">Entre más piezas del mismo modelo agregues, menor el precio por unidad. Elige tu paquete mixto y arma tu pedido en segundos.</p>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<main id="catalog"></main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <img src="imgs/logo.webp" alt="Straven" class="footer-logo">
+  <p>Catálogo de mayoreo · Los precios incluyen IVA · Sujetos a cambio sin previo aviso</p>
+</footer>
+
+<!-- ===== PRODUCT MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="productModal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">&times;</button>
+    <div class="modal-grid">
+      <div class="modal-gallery">
+        <div class="gallery-main">
+          <button class="gallery-arrow gallery-arrow-left" id="galleryPrev" aria-label="Anterior">&#8249;</button>
+          <img src="" alt="" id="galleryMainImg">
+          <button class="gallery-arrow gallery-arrow-right" id="galleryNext" aria-label="Siguiente">&#8250;</button>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+      <div class="modal-info">
+        <div class="modal-brand-row">
+          <img src="" alt="" id="modalBrandLogo" class="modal-brand-logo">
+          <span class="modal-category" id="modalCategory"></span>
+        </div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <span class="modal-promo" id="modalPromo"></span>
+
+        <table class="price-tiers" id="priceTiers">
+          <tbody></tbody>
+        </table>
+
+        <div class="modal-current-price">
+          <span class="modal-price-label">Tu precio actual</span>
+          <span class="modal-price-value" id="modalCurrentPrice">$0.00 <small>c/u</small></span>
+        </div>
+        <p class="modal-upsell" id="modalUpsell"></p>
+
+        <div class="modal-qty-row">
+          <div class="stepper">
+            <button class="step-btn" id="modalQtyMinus" aria-label="Restar">−</button>
+            <input type="number" id="modalQtyInput" value="1" min="1">
+            <button class="step-btn" id="modalQtyPlus" aria-label="Sumar">+</button>
+          </div>
+          <button class="btn btn-primary" id="modalAddBtn">Agregar al carrito</button>
+        </div>
+
+        <button class="btn btn-mixed" id="modalMixedBtn"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h2>Tu pedido</h2>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <p>Tu carrito está vacío.</p>
+      <p class="cart-empty-sub">Agrega productos para armar tu pedido de mayoreo.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <button class="btn btn-primary btn-block" id="cartWhatsappBtn">Enviar pedido por WhatsApp</button>
+    <button class="btn-text" id="cartClearBtn">Vaciar carrito</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
