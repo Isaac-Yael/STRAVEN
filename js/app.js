@@ -100,7 +100,7 @@ function productCardHTML(p){
     <div class="card-media" data-action="open-modal">
       ${p.promo ? `<span class="badge-promo">${p.promo}</span>` : ""}
       <span class="badge-brand"><img src="logo/${p.brandLogo}" alt=""></span>
-      <img src="${cover}" alt="${p.name}" loading="lazy" class="card-cover-img">
+      <img src="${cover}" alt="${p.name}" loading="lazy">
     </div>
     <div class="card-body">
       <h3 class="card-title" data-action="open-modal">${p.name}</h3>
@@ -159,53 +159,6 @@ function refreshCardPricing(){
     card.querySelector('[data-role="card-upsell"]').textContent = next
       ? `Agrega ${next.min - previewQty} más y paga ${formatMoney(p[next.key])} c/u`
       : "Ya tienes el mejor precio";
-  });
-}
-
-// ============================================================
-// CICLO DE IMÁGENES EN TARJETAS
-// ============================================================
-function startCardImageCycling(){
-  document.querySelectorAll(".product-card").forEach(card => {
-    const id = card.dataset.productId;
-    const p = productsById[id];
-    if (!p || !p.images || p.images.length < 2) return;
-    const media = card.querySelector(".card-media");
-    const img = card.querySelector(".card-cover-img");
-    if (!media || !img) return;
-
-    // precarga para que el deslizado no muestre un parpadeo de carga
-    const srcs = p.images.map(file => imgPath(p, file));
-    srcs.forEach(src => { const pre = new Image(); pre.src = src; });
-
-    let idx = 0;
-    let sliding = false;
-    const SLIDE_MS = 420;
-
-    setInterval(() => {
-      if (sliding) return;
-      sliding = true;
-      idx = (idx + 1) % srcs.length;
-
-      const incoming = img.cloneNode();
-      incoming.removeAttribute("loading");
-      incoming.src = srcs[idx];
-      incoming.classList.add("card-cover-incoming");
-      media.appendChild(incoming);
-
-      // forzar layout antes de animar para que la transición se dispare
-      requestAnimationFrame(() => {
-        img.classList.add("slide-out");
-        incoming.classList.add("slide-in");
-      });
-
-      setTimeout(() => {
-        img.src = srcs[idx];
-        img.classList.remove("slide-out");
-        incoming.remove();
-        sliding = false;
-      }, SLIDE_MS);
-    }, 2500);
   });
 }
 
@@ -602,7 +555,6 @@ function setupCartEvents(){
 function init(){
   loadCart();
   renderCatalog();
-  startCardImageCycling();
   setupScrollspy();
   setupCatalogEvents();
   setupModalEvents();
