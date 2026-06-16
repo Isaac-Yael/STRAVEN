@@ -407,6 +407,13 @@ function sendWhatsappOrder(){
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
 }
 
+function setupWhatsappFloat(){
+  const btn = document.getElementById("whatsappFloat");
+  if (!btn) return;
+  const msg = encodeURIComponent("Hola Straven, quiero más información y ayuda con sus productos.");
+  btn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+
 // ============================================================
 // TOAST
 // ============================================================
@@ -559,6 +566,7 @@ function init(){
   setupCatalogEvents();
   setupModalEvents();
   setupCartEvents();
+  setupWhatsappFloat();
   renderAll();
 }
 
