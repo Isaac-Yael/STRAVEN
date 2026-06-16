@@ -172,10 +172,20 @@ function startCardImageCycling(){
     if (!p || !p.images || p.images.length < 2) return;
     const img = card.querySelector(".card-cover-img");
     if (!img) return;
+
+    // precarga para que el desvanecido no muestre un parpadeo de carga
+    const srcs = p.images.map(file => imgPath(p, file));
+    srcs.forEach(src => { const pre = new Image(); pre.src = src; });
+
     let idx = 0;
+    const FADE_MS = 380;
     setInterval(() => {
-      idx = (idx + 1) % p.images.length;
-      img.src = imgPath(p, p.images[idx]);
+      idx = (idx + 1) % srcs.length;
+      img.style.opacity = "0";
+      setTimeout(() => {
+        img.src = srcs[idx];
+        img.style.opacity = "1";
+      }, FADE_MS);
     }, 2500);
   });
 }
@@ -352,14 +362,14 @@ function cartItemCount(){
 function renderCart(){
   const items = Object.entries(cart);
   const container = document.getElementById("cartItems");
-  const emptyEl = document.getElementById("cartEmpty");
 
   if (items.length === 0){
-    container.innerHTML = "";
-    container.appendChild(emptyEl);
-    emptyEl.style.display = "block";
+    container.innerHTML = `
+      <div class="cart-empty" id="cartEmpty">
+        <p>Tu carrito está vacío.</p>
+        <p class="cart-empty-sub">Agrega productos para armar tu pedido de mayoreo.</p>
+      </div>`;
   } else {
-    emptyEl.style.display = "none";
     container.innerHTML = items.map(([key, line]) => {
       const p = productsById[line.productId];
       const amount = cartLineAmount(line);
