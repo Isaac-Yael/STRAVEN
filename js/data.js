@@ -3,7 +3,7 @@ const PRODUCTS = [
   {
     "id": "bermuda_levis",
     "name": "Bermudas Levi's",
-    "category": "Bermudas",
+    "category": "Bottom",
     "brandLogo": "levis.webp",
     "promo": "",
     "priceRetail": 349.0,
@@ -25,7 +25,7 @@ const PRODUCTS = [
   {
     "id": "calcetas",
     "name": "Calcetas",
-    "category": "Calcetas",
+    "category": "Otros",
     "brandLogo": "multimarca.webp",
     "promo": "",
     "priceRetail": 14.0,
@@ -115,7 +115,7 @@ const PRODUCTS = [
   {
     "id": "chaleco_columbia",
     "name": "Chaleca Columbia",
-    "category": "Chaleco",
+    "category": "Otros",
     "brandLogo": "columbia.webp",
     "promo": "",
     "priceRetail": 335.0,
@@ -132,7 +132,7 @@ const PRODUCTS = [
   {
     "id": "chamarra_adidas",
     "name": "Chamarra Adidas",
-    "category": "Chamarra",
+    "category": "Sudadera",
     "brandLogo": "adidas.webp",
     "promo": "",
     "priceRetail": 399.0,
@@ -150,7 +150,7 @@ const PRODUCTS = [
   {
     "id": "chamarra_polar_columbia",
     "name": "Chamarra Polar Columbia",
-    "category": "Chamarra",
+    "category": "Sudadera",
     "brandLogo": "columbia.webp",
     "promo": "",
     "priceRetail": 335.0,
@@ -296,7 +296,7 @@ const PRODUCTS = [
   {
     "id": "jeans_levis",
     "name": "Jeans Levi's",
-    "category": "Pantalón",
+    "category": "Bottom",
     "brandLogo": "levis.webp",
     "promo": "2x1",
     "priceRetail": 799.0,
@@ -318,7 +318,7 @@ const PRODUCTS = [
   {
     "id": "leggins_athleta",
     "name": "Leggins Athleta",
-    "category": "leggins",
+    "category": "Bottom",
     "brandLogo": "athleta.webp",
     "promo": "2x1",
     "priceRetail": 299.0,
@@ -348,7 +348,7 @@ const PRODUCTS = [
   {
     "id": "leggins_under",
     "name": "Leggins Under Armour",
-    "category": "leggins",
+    "category": "Bottom",
     "brandLogo": "under.webp",
     "promo": "",
     "priceRetail": 185.0,
@@ -370,7 +370,7 @@ const PRODUCTS = [
   {
     "id": "mascarillas",
     "name": "Mascarillas",
-    "category": "Mascarillas",
+    "category": "Belleza",
     "brandLogo": "freeman.webp",
     "promo": "",
     "priceRetail": 10.0,
@@ -599,7 +599,7 @@ const PRODUCTS = [
   {
     "id": "shampoo",
     "name": "Shampoo",
-    "category": "Shampoo",
+    "category": "Belleza",
     "brandLogo": "ogx.webp",
     "promo": "2x1",
     "priceRetail": 170.0,
@@ -633,7 +633,7 @@ const PRODUCTS = [
   {
     "id": "shorts_levis",
     "name": "Shorts Levi's",
-    "category": "Shorts",
+    "category": "Bottom",
     "brandLogo": "levis.webp",
     "promo": "",
     "priceRetail": 369.0,

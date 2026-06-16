@@ -71,7 +71,8 @@ function getCategories(){
     if (!set.has(disp)) set.set(disp, []);
     set.get(disp).push(p);
   });
-  return Array.from(set.entries()).sort((a,b) => a[0].localeCompare(b[0], "es"));
+  // categorías con más productos primero; empate se resuelve alfabéticamente
+  return Array.from(set.entries()).sort((a,b) => b[1].length - a[1].length || a[0].localeCompare(b[0], "es"));
 }
 
 function slugify(s){
@@ -102,7 +103,6 @@ function productCardHTML(p){
       <img src="${cover}" alt="${p.name}" loading="lazy">
     </div>
     <div class="card-body">
-      <span class="card-category">${displayCategory(p.category)}</span>
       <h3 class="card-title" data-action="open-modal">${p.name}</h3>
       <div class="card-price-row">
         <span class="card-price" data-role="card-price">${formatMoney(unitPrice)}</span>
@@ -347,11 +347,12 @@ function renderCart(){
       const amount = cartLineAmount(line);
       const qty = line.type === "regular" ? line.qty : line.bundles;
       const cover = p.images[0] ? imgPath(p, p.images[0]) : "";
+      const lineName = line.type === "mixed" ? `${p.name} <span class="cart-line-badge">Paquete mixto</span>` : p.name;
       return `
       <div class="cart-line" data-line-key="${key}">
         <img src="${cover}" alt="${p.name}">
         <div>
-          <p class="cart-line-name">${p.name}</p>
+          <p class="cart-line-name">${lineName}</p>
           <p class="cart-line-tier">${amount.tierLabel}</p>
           <div class="cart-line-controls">
             <div class="stepper">
