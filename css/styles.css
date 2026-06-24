@@ -456,6 +456,62 @@ body::before{
   box-shadow: 0 14px 32px -6px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
 }
 
+/* ===================== DESCARGA CATÁLOGO ===================== */
+.catalog-download{
+  position:relative; z-index:1;
+  min-height: calc(100vh - 200px);
+  display:flex; align-items:center; justify-content:center;
+  padding: 70px 24px;
+  text-align:center;
+}
+.catalog-download-inner{ max-width: 640px; }
+.catalog-kicker{
+  font-family: var(--font-display); font-size:12.5px; letter-spacing:.22em;
+  text-transform:uppercase; color: var(--accent); margin:0 0 18px;
+}
+.catalog-title{
+  font-family: var(--font-display); font-weight:700;
+  font-size: clamp(30px, 5vw, 50px); line-height:1.18; margin:0 0 18px;
+}
+.catalog-sub{
+  color: var(--text-dim); font-size:16px; line-height:1.65;
+  max-width: 480px; margin: 0 auto 44px;
+}
+.btn-download{
+  position:relative; isolation:isolate;
+  display:inline-flex; align-items:center; gap:12px;
+  font-family: var(--font-display); font-weight:700; font-size:16px;
+  letter-spacing:.04em; text-transform:uppercase;
+  color:#0a0a0b; background: var(--accent);
+  padding: 19px 38px; border-radius:999px;
+  box-shadow: 0 14px 34px -10px rgba(133,255,34,0.5);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn-download:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 40px -10px rgba(133,255,34,0.65);
+}
+.btn-download::before, .btn-download::after{
+  content:""; position:absolute; inset:0; border-radius:999px;
+  border: 2px solid var(--accent);
+  opacity:0.6; z-index:-1;
+  animation: ring-pulse 2.4s ease-out infinite;
+  pointer-events:none;
+}
+.btn-download::after{ animation-delay: 1.2s; }
+@keyframes ring-pulse{
+  0%{ transform: scale(1); opacity:.55; }
+  100%{ transform: scale(1.45); opacity:0; }
+}
+.btn-download-icon{ width:20px; height:20px; animation: bounce-down 1.4s ease-in-out infinite; }
+@keyframes bounce-down{
+  0%,50%,100%{ transform: translateY(0); }
+  25%{ transform: translateY(3px); }
+}
+.catalog-note{
+  margin-top:24px; font-size:12.5px; color: var(--text-faint); letter-spacing:.05em;
+}
+
 /* ===================== RESPONSIVE ===================== */
 @media(max-width:520px){
   .header-inner{ padding: 12px 16px; }
@@ -467,4 +523,5 @@ body::before{
   .card-price{ font-size:18px; }
   .whatsapp-float{ width:52px; height:52px; bottom:18px; right:18px; }
   .whatsapp-float svg{ width:26px; height:26px; }
+  .btn-download{ padding:17px 28px; font-size:14.5px; }
 }
